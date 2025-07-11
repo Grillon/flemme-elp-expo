@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio de Thierry Vogel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1e40af;
+      --secondary-color: #3b82f6;
+      --accent-color: #60a5fa;
+      --text-color: #1f2937;
+      --bg-color: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --border-color: rgba(30, 64, 175, 0.1);
+    }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: var(--text-color);
+      scroll-behavior: smooth;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .section {
+      margin: 4rem 0;
+      padding: 3rem 0;
+    }
+    
+    .card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 25px rgba(30, 64, 175, 0.1);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(30, 64, 175, 0.15);
+    }
+    
+    .galerie {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .galerie img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .galerie a:hover img {
+      transform: scale(1.05);
+    }
+    
+    .projet {
+      margin: 3rem 0;
+      padding: 2rem;
+      scroll-margin-top: 2rem;
+    }
+    
+    .projet-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: rgba(30, 64, 175, 0.05);
+      border-radius: 0.5rem;
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .projet-meta li {
+      list-style: none;
+      padding: 0.25rem 0;
+    }
+    
+    .projet-meta strong {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .solution-list, .apprentissage-list {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .solution-list li, .apprentissage-list li {
+      margin: 0.5rem 0;
+      position: relative;
+    }
+    
+    .solution-list li::before {
+      content: "✓";
+      color: #10b981;
+      font-weight: bold;
+      position: absolute;
+      left: -1.5rem;
+    }
+    
+    .apprentissage-list li::before {
+      content: "💡";
+      position: absolute;
+      left: -1.5rem;
+    }
+    
+    .projet-visuel {
+      margin: 2rem 0;
+      text-align: center;
+    }
+    
+    .projet-visuel img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .files-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .file-item:hover {
+      background: rgba(30, 64, 175, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .file-icon {
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+    
+    .file-type {
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    
+    .documents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .document-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    .document-item:hover {
+      background: rgba(30, 64, 175, 0.05);
+      transform: translateY(-2px);
+    }
+    
+    .document-icon {
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+    
+    .document-type {
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary-color);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2);
+    }
+    
+    .social-link:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+    }
+    
+    .header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="10" height="10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      pointer-events: none;
+    }
+    
+    .header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .footer {
+      background: #1f2937;
+      color: white;
+      padding: 3rem 0 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    
+    .nav-links {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav-link {
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .projects-index {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 300px;
+      transition: all 0.3s ease;
+    }
+    
+    .projects-index.collapsed {
+      width: auto;
+    }
+    
+    .projects-index-header {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: between;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+    
+    .projects-index-content {
+      padding: 0.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    
+    .project-index-item {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      color: var(--text-color);
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      margin-bottom: 0.25rem;
+    }
+    
+    .project-index-item:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+      
+      .galerie {
+        grid-template-columns: 1fr;
+      }
+      
+      .projet-meta {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        position: static;
+        justify-content: center;
+        margin: 1rem;
+      }
+      
+      .projects-index {
+        position: static;
+        margin: 1rem;
+        max-width: none;
+      }
+      
+      .socials {
+        gap: 1rem;
+      }
+      
+      .social-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+      
+      .files-grid, .documents-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation flottante -->
+  <nav class="nav-links">
+    <a href="#aboutl" class="nav-link">A propos</a>
+    <a href="#galerie" class="nav-link">Galerie</a>
+    <a href="#projets" class="nav-link">Projets</a>
+    <a href="#documents" class="nav-link">Documents</a>
+  </nav>
+
+  <!-- Index des projets pliable (dans la page générée) -->
+  
+  <div class="projects-index" id="projectsIndex">
+    <div class="projects-index-header" onclick="toggleProjectsIndex()">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+      </svg>
+      <span>Projets (7)</span>
+      <svg class="w-4 h-4 transition-transform" id="indexChevron" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+      </svg>
+    </div>
+    <div class="projects-index-content" id="projectsIndexContent">
+      
+      <a href="#wallex" class="project-index-item">
+        WallEx
+      </a>
+      
+      <a href="#easylandingweb" class="project-index-item">
+        EasyLandingWeb
+      </a>
+      
+      <a href="#thugz-plugin" class="project-index-item">
+        Thugz Plugin
+      </a>
+      
+      <a href="#lsynckey" class="project-index-item">
+        LsyncKey
+      </a>
+      
+      <a href="#connected-magnet" class="project-index-item">
+        Connected Magnet
+      </a>
+      
+      <a href="#desktop-cluster" class="project-index-item">
+        Desktop Cluster
+      </a>
+      
+      <a href="#démos-live-et-présentations-libres-(2017–2022)" class="project-index-item">
+        Démos live et présentations libres (2017–2022)
+      </a>
+      
+    </div>
+  </div>
+  
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1 class="fade-in">Portfolio de Thierry Vogel</h1>
+      <p class="text-xl opacity-90 mt-4">Architecte fiabilité. J’assemble, j’éprouve, je documente.
+Mon champ : infrastructures lisibles, déploiements sobres, systèmes robustes.</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <section id="aboutl" class="section fade-in">
+      <div class="card">
+        <div class="projet">
+          <h2 class="text-3xl font-bold mb-4 text-center">À propos</h2>
+          <p class="text-lg leading-relaxed text-left max-w-prose mx-auto">
+            J’interviens sur les architectures systèmes avec une logique de fiabilité, de testabilité et de documentation intégrée.
+Mon parcours croise l’administration système, le prototypage technique et la médiation logicielle.
+Je travaille à partir de contraintes réelles, pas de promesses.
+J’explore les points de rupture pour stabiliser des formes utiles.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Section Galerie -->
+    <section id="galerie" class="section fade-in">
+      <h2 class="text-3xl font-bold mb-8 text-center">Mes projets en un coup d'œil</h2>
+      <div class="galerie">
+        
+        <div class="card">
+          <a href="#wallex">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/small_wallex.png" alt="wallex" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">wallex</h3>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="#easylandingweb">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/small_simple_sombre_s.png" alt="easylandingweb" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">easylandingweb</h3>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="#thugz-plugin">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/small_Thugz_plugin.png" alt="thugz-plugin" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">thugz plugin</h3>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="#lsynckey">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/proto_physiques/small_LSyncKey_20190528_190348371.jpg" alt="lsynckey" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">lsynckey</h3>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="#connected-magnet">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/connected_magnet.png" alt="connected-magnet" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">connected magnet</h3>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="#desktop-cluster">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/proto_physiques/small_desktop_cluster_2018.jpg" alt="desktop-cluster" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">desktop cluster</h3>
+            </div>
+          </a>
+        </div>
+        
+        <div class="card">
+          <a href="#démos-live-et-présentations-libres-(2017–2022)">
+            <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/bricolotech.jpg" alt="démos-live-et-présentations-libres-(2017–2022)" loading="lazy">
+            <div class="p-4">
+              <h3 class="font-semibold text-center capitalize">démos live et présentations libres (2017–2022)</h3>
+            </div>
+          </a>
+        </div>
+        
+      </div>
+    </section>
+    
+
+    <!-- Section Projets -->
+    <section id="projets" class="section fade-in">
+      <h2 class="text-3xl font-bold mb-8 text-center">Mes projets</h2>
+        
+          
+          <div class="card projet" id="wallex">
+          
+                <h3 class="text-2xl font-bold mb-4">WallEx</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> MVP personnel</div>
+                  <div><strong>Année :</strong> 2024</div>
+                  <div><strong>Stack :</strong> FastAPI, Dash, Plotly, Moralis, Zerion</div>
+                  <div><strong>Rôle :</strong> Concepteur fullstack</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Visualiser simplement plusieurs wallets crypto avec PnL.</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Agrégation API Zerion + Moralis</li><li>Interface Dash interactive</li><li>Tagging et filtrage d’actifs</li><li>Calcul de PnL par token</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Limites des API publiques</li><li>Nécessité de persistance utilisateur locale</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/small_wallex.png" alt="Visuel WallEx" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                          <a href="https://github.com/apprensemble/wallex" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Wallex (CLI/Base)</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                          <a href="https://github.com/apprensemble/wallex_ihm" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Wallex IHM avec Dash</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                          <a href="https://apprensemble.github.io/wallex-site/" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Wallex vitrine</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+          
+          <div class="card projet" id="easylandingweb">
+          
+                <h3 class="text-2xl font-bold mb-4">EasyLandingWeb</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> Générateur de landing page</div>
+                  <div><strong>Année :</strong> 2025</div>
+                  <div><strong>Stack :</strong> Bolt.new, Next.js, JavaScript</div>
+                  <div><strong>Rôle :</strong> Concepteur et dev</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Créer rapidement une landing page pour petits projets (ex : resto).</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Template RESTO prêt à l’emploi</li><li>Pré-remplissage intelligent</li><li>Badge World's Largest Hackathon intégré</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Mock d’IA narrative en JS</li><li>Limites UX de l'automatisation naïve</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/small_simple_sombre_s.png" alt="Visuel EasyLandingWeb" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                            <div class="w-full mb-4">
+                              <div class="font-medium mb-1">Pitch de présentation</div>
+                              <iframe class="w-full aspect-video rounded shadow"
+                                src="https://www.youtube.com/embed/SrK8LoDJzEc"
+                                frameborder="0"
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                          <a href="https://grillon.github.io/easylandingweb-gallery/gallery.html" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Gallery</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+          
+          <div class="card projet" id="thugz-plugin">
+          
+                <h3 class="text-2xl font-bold mb-4">Thugz Plugin</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> Hackathon Web3 Unreal</div>
+                  <div><strong>Année :</strong> 2025</div>
+                  <div><strong>Stack :</strong> Unreal Engine, RPC</div>
+                  <div><strong>Rôle :</strong> Support tech & bizdev</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Les jeux classiques et web2 sont amusant mais pas les jeux web3...
+Les acteurs du web3 ne savent pas faire les jeux.</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Prototype Unreal plugin (fonctionnel)</li><li>Recherche Partenariat (J'ai trouvé 2 potentiel partenaires, d'accord sur le principe)</li><li>Pitch public et support live</li><li>Aucun lock et on offre toutes les possibilités, la seule limite est l'imagination</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Nécessité d’un relai terrain solide</li><li>Importance des démonstrations</li><li>Offrir trop de possibilité fait que personne ne se sent vraiment ciblé</li><li>Difficulté à garder l'unité lorsqu'une idée de départ est trop large</li><li>Confrontation avec le vrai marché(le web3 est très mal vu par une bonne partie de la communauté gaming)</li><li>Un marché qui semble fermé ne l'est pas tant que cela car il y a toujours des niches interessantes</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/small_Thugz_plugin.png" alt="Visuel Thugz Plugin" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                            <div class="w-full mb-4">
+                              <div class="font-medium mb-1">Pitch Colosseum (ce que c'est devenu)</div>
+                              <iframe class="w-full aspect-video rounded shadow"
+                                src="https://www.youtube.com/embed/hQRs0zWUJMM"
+                                frameborder="0"
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                            <div class="w-full mb-4">
+                              <div class="font-medium mb-1">Projet original</div>
+                              <iframe class="w-full aspect-video rounded shadow"
+                                src="https://www.youtube.com/embed/9-q2U1hRO8o"
+                                frameborder="0"
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                          <a href="https://github.com/ThugzLabs" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Github Thugz (pas seulement du plugin)</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+          
+          <div class="card projet" id="lsynckey">
+          
+                <h3 class="text-2xl font-bold mb-4">LsyncKey</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> Prototype hardware</div>
+                  <div><strong>Année :</strong> 2019</div>
+                  <div><strong>Stack :</strong> Raspberry Pi Zero, Syncthing, Linux USB gadget</div>
+                  <div><strong>Rôle :</strong> Inventeur</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Il est parfois compliqué de garder ses données synchro entre differents PC, différents lieux, différentes plateforme. desktop, portable, PC pro...</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Une clé de synchronisation active qui sauvegarde et versionne en arrière plan vos fichiers important.</li><li>Elle est détecté comme une clé USB de données classique et aussi comme une clé logiciele.</li><li> Elle peut se connecter au resaux wifi et se synchroniser avec d'autres clés, pour cela il suffit de mettre 2 clé en mode synchro avec un bouton physique.</li><li>Le prototype est une raspi-zero avec debian et le mode gadget qui permet de la detecter comme une clé USB de données</li><li>Elle a plusieurs partition, l'une avec les données, une avec un point de restau et une avec l'OS.</li><li>Le systeme de synchronisation des données est syncthing.</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Limites de l’UX sans interface</li><li>Pour des raisons inconnus le comportement changeait totalement d'un PC à un autre, même sous windows</li><li>Sur mon PC de dev tt fonctionnait et sur les autres c'était aleatoire.</li><li>L'idée me semblait simple mais chaque jours était un nouveau défi</li><li>J'avais des acheteurs pour le produit, qq1 m'a même payé je n'ai pas réussi à refuser et d'autres étaient pres à le faire</li><li>J'avais aussi trouvé des gens pret à m'aider pour le dev. D'ailleurs un ami m'a accompagné un peu sur le brainstorming.</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/proto_physiques/small_LSyncKey_20190528_190348371.jpg" alt="Visuel LsyncKey" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                          <a href="https://framagit.org/bricolotech/lsynckey" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">gitlab (je ne pense pas que ce soit a jour)</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+          
+          <div class="card projet" id="connected-magnet">
+          
+                <h3 class="text-2xl font-bold mb-4">Connected Magnet</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> Prototype atelier</div>
+                  <div><strong>Année :</strong> 2019</div>
+                  <div><strong>Stack :</strong> ESP8266, Wi-Fi, breadboard, 3D print, Arduino, heroku, mqtt, gitlab-ci</div>
+                  <div><strong>Rôle :</strong> Concepteur et animateur atelier</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Initier à l’IoT avec un objet connecté simple et autonome.</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Prototype fonctionnel à pile sans soudure</li><li>Boîtier imprimé 3D, ESP8266 sur mini breadboard</li><li>Utilisé dans un atelier avec 12 directeurs Orange Business</li><li>Complet magnet avec ecran connectable au wifi + pile + boitier + interface web pour interaction </li><li>Deploiement automatique de tt l'environnement sur Heroku (complexité masquée)</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Décalage entre prototype technique et attente produit fini</li><li>Rôle clé de la médiation dans un cadre innovation</li><li>Design 3D avec openscad</li><li>Prenait bcp plus de temps que prevu à realiser mais on a reussi a arriver à qq chose de fonctionnel</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/connected_magnet.png" alt="Visuel Connected Magnet" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                          <a href="https://framagit.org/apprensemble/connected_magnet" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">gitlab connected magnet</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                          <a href="https://framagit.org/apprensemble/connected_magnet_webapp" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">gitlab interface connected magnet</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                          <a href="https://github.com/apprensemble/impression3D/blob/master/magnet/Boite.stl" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">boitier 3D OpenSCAD</div>
+                              <div class="file-type">image</div>
+                            </div>
+                          </a>
+                          <a href="https://github.com/apprensemble/impression3D/blob/master/magnet/Couvercle.stl" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Couvercle 3D OpenSCAD</div>
+                              <div class="file-type">image</div>
+                            </div>
+                          </a>
+                          <a href="https://grillon.github.io/portfolio-sideprojects/gallery_proto_physiques_from_assets.html" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Galerie photos</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+          
+          <div class="card projet" id="desktop-cluster">
+          
+                <h3 class="text-2xl font-bold mb-4">Desktop Cluster</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> Prototype physique</div>
+                  <div><strong>Année :</strong> 2018</div>
+                  <div><strong>Stack :</strong> Matériel hétérogène, réseau local, services déportés</div>
+                  <div><strong>Rôle :</strong> Concepteur</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Comment expérimenter concrètement les architectures distribuées avec du matériel récupéré et non homogène.</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Création d’un cluster de machines avec spécialisation fonctionnelle par nœud</li><li>Démonstration publique lors de la Fête de la Science</li><li>Simulation artisanale d’une logique de calcul distribué</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Adapter un projet à des contraintes matérielles fortes</li><li>Renoncer à l’affichage distant, pivoter vers les services headless</li><li>Formaliser une architecture utile avec peu de moyens</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/proto_physiques/small_desktop_cluster_2018.jpg" alt="Visuel Desktop Cluster" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                          <a href="https://framagit.org/bricolotech/desktop-cluster" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Dépôt original</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                          <a href="https://framagit.org/bricolotech/desktop-cluster-sef" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Version Fête de la Science</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+          
+          <div class="card projet" id="démos-live-et-présentations-libres-(2017–2022)">
+          
+                <h3 class="text-2xl font-bold mb-4">Démos live et présentations libres (2017–2022)</h3>
+                <div class="projet-meta">
+                  <div><strong>Type :</strong> Conférences, ateliers, webinaires</div>
+                  <div><strong>Année :</strong> 2017–2022</div>
+                  <div><strong>Stack :</strong> Proxmox, Mailpile, Tor, VPN, DNS, Tailscale, Matrix, Syncthing,desktop-cluster...</div>
+                  <div><strong>Rôle :</strong> Passeur technique, animateur de démos</div>
+                </div>
+                <div class="mb-4">
+                  <p><strong class="text-lg">Problème :</strong></p>
+                  <p class="mt-2">Faire découvrir des outils libres avancés dans un cadre bienveillant, sans formalisme, à des publics variés.</p>
+                </div>
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Solution :</strong></p>
+                  <ul class="solution-list">
+                    <li>Préparation rapide de démos fonctionnelles, souvent sur des sujets imposés ou nouveaux</li><li>Mise en place d’infra réseau complète : VM, DNS, services Tor, VPN mesh</li><li>Démos en conditions réelles : webmail Tor, SSO alternatif, etc.</li><li>Usage occasionnel de slides, parfois filmé ou photographié</li><li>Événements ouverts à tous, annoncés publiquement</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="mb-4">
+                  <p><strong class="text-lg">Ce que j'ai appris :</strong></p>
+                  <ul class="apprentissage-list">
+                    <li>Forage rapide de doc technique</li><li>Adapter le niveau et la forme selon l’audience</li><li>Pédagogie par la preuve et l’expérience directe</li><li>La transmission technique est un acte de présence, pas seulement de publication</li><li>Accepter l’incertitude de la réception</li>
+                  </ul>
+                </div>
+                
+                
+                <div class="projet-visuel">
+                  <img src="https://raw.githubusercontent.com/Grillon/portfolio-sideprojects/refs/heads/main/assets/pictures/bricolotech.jpg" alt="Visuel Démos live et présentations libres (2017–2022)" loading="lazy">
+                </div>
+                
+                
+                  <div class="mt-6">
+                    <p><strong class="text-lg">Fichiers et ressources :</strong></p>
+                    <div class="files-grid mt-3">
+                      
+                          <a href="https://montpellibre.fr/" target="_blank" class="file-item">
+                            <div class="file-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                            <div class="flex-1">
+                              <div class="font-medium">Montpel'libre</div>
+                              <div class="file-type">link</div>
+                            </div>
+                          </a>
+                    </div>
+                  </div>
+                
+          
+          </div>
+          
+        
+    </section>
+
+    
+    <!-- Section Documents -->
+    <section id="documents" class="section fade-in">
+      <div class="card">
+        <div class="projet">
+          <h2 class="text-3xl font-bold mb-6 text-center">Documents à partager</h2>
+          <div class="documents-grid">
+            
+                <a href="https://drive.google.com/file/d/1qf4HdpFVf4Nb-YdNKNoIST83GvUG-FTO/view?usp=sharing" target="_blank" class="document-item">
+                  <div class="document-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                  <div class="flex-1">
+                    <div class="font-medium">CV</div>
+                    <div class="document-type">link</div>
+                  </div>
+                </a>
+                <a href="https://drive.google.com/file/d/13gcNyMYb4mj16-l7ADz0zTQEFOu3T0ui/view?usp=sharing" target="_blank" class="document-item">
+                  <div class="document-icon"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+    </svg></div>
+                  <div class="flex-1">
+                    <div class="font-medium">Dossier de compétences</div>
+                    <div class="document-type">link</div>
+                  </div>
+                </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      
+      <div class="socials">
+        
+        <a href="https://github.com/grillon" target="_blank" class="social-link">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+    </svg>
+          <span>GitHub</span>
+        </a>
+        
+        <a href="https://www.linkedin.com/in/thierryvogel" target="_blank" class="social-link">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+    </svg>
+          <span>LinkedIn</span>
+        </a>
+        
+      </div>
+      
+      <div class="mt-8 pt-8 border-t border-gray-600">
+        <p class="text-sm opacity-75">Page générée avec ❤️ par EasyLandingWeb</p>
+        <p class="text-xs opacity-50 mt-2">© 2025 Thierry Vogel. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fonction pour basculer l'index des projets
+    function toggleProjectsIndex() {
+      const content = document.getElementById('projectsIndexContent');
+      const chevron = document.getElementById('indexChevron');
+      const index = document.getElementById('projectsIndex');
+      
+      if (content.style.display === 'none') {
+        content.style.display = 'block';
+        chevron.style.transform = 'rotate(0deg)';
+        index.classList.remove('collapsed');
+      } else {
+        content.style.display = 'none';
+        chevron.style.transform = 'rotate(-90deg)';
+        index.classList.add('collapsed');
+      }
+    }
+
+    // Animation au scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Animation immédiate pour le header
+    document.querySelector('.header').style.opacity = '1';
+    document.querySelector('.header').style.transform = 'translateY(0)';
+
+    // Smooth scroll pour les liens de navigation
+    document.querySelectorAll('.nav-link, .project-index-item').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
